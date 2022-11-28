@@ -14,7 +14,7 @@ class MemoApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(title: 'Notes'),
+      home: const HomePage(title: 'Database'),
     );
   }
 }
@@ -36,8 +36,31 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: IntrinsicWidth(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              OutlinedButton(
+                onPressed: () {
+                  debugPrint("create database");
+                },
+                child: const Text("Create"),
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  debugPrint("open database");
+                },
+                child: const Text("Open"),
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  debugPrint("open to database");
+                },
+                child: const Text("Connect"),
+              )
+            ],
+          ),
         ),
       ),
     );
