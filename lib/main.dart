@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'home_page.dart';
+import 'screens/start_screen.dart';
 
 void main() {
   runApp(const MemoApp());
@@ -27,7 +27,7 @@ class MemoApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: const StartScreen(),
     );
   }
 }
