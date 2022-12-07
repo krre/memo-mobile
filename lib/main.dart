@@ -25,7 +25,7 @@ class MemoApp extends StatelessWidget {
         Locale('ru', ''),
       ],
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
       ),
       home: const StartScreen(),
     );
