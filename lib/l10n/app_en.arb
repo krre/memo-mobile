@@ -3,5 +3,6 @@
     "create": "Create",
     "open": "Open",
     "connect": "Connect",
-    "createDatabase": "Create Database"
+    "createDatabase": "Create Database",
+    "connectDatabase": "Connect to Database"
 }

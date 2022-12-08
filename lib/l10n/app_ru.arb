@@ -3,5 +3,6 @@
     "create": "Создать",
     "open": "Открыть",
     "connect": "Подключиться",
-    "createDatabase": "Создать базу данных"
+    "createDatabase": "Создать базу данных",
+    "connectDatabase": "Подключиться к базе данных"
 }

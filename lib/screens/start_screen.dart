@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'create_database_screen.dart';
+import 'connect_database_screen.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -33,7 +34,9 @@ class StartScreen extends StatelessWidget {
               ),
               OutlinedButton(
                 onPressed: () {
-                  debugPrint("open to database");
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const ConnectDatabaseScreen(),
+                  ));
                 },
                 child: Text(AppLocalizations.of(context)!.connect),
               ),
