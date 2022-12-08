@@ -4,5 +4,6 @@
     "open": "Open",
     "connect": "Connect",
     "createDatabase": "Create Database",
-    "connectDatabase": "Connect to Database"
+    "connectDatabase": "Connect to Database",
+    "name": "Name"
 }
