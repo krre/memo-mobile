@@ -32,7 +32,7 @@ class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
                   labelText: AppLocalizations.of(context)!.name,
                 ),
               ),
-              OutlinedButton(
+              ElevatedButton(
                   onPressed: _buttonEnabled
                       ? () {
                           debugPrint(_name);

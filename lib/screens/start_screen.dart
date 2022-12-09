@@ -18,7 +18,7 @@ class StartScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              OutlinedButton(
+              ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => const CreateDatabaseScreen(),
@@ -26,13 +26,13 @@ class StartScreen extends StatelessWidget {
                 },
                 child: Text(AppLocalizations.of(context)!.create),
               ),
-              OutlinedButton(
+              ElevatedButton(
                 onPressed: () {
                   debugPrint("open database");
                 },
                 child: Text(AppLocalizations.of(context)!.open),
               ),
-              OutlinedButton(
+              ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => const ConnectDatabaseScreen(),

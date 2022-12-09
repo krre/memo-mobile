@@ -51,7 +51,7 @@ class _ConnectDatabaseScreenState extends State<ConnectDatabaseScreen> {
                   labelText: AppLocalizations.of(context)!.key,
                 ),
               ),
-              OutlinedButton(
+              ElevatedButton(
                   onPressed:
                       _ip.isNotEmpty && _port.isNotEmpty && _key.isNotEmpty
                           ? () {
