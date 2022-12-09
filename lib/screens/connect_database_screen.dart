@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'notes_screen.dart';
 
 class ConnectDatabaseScreen extends StatefulWidget {
   const ConnectDatabaseScreen({super.key});
@@ -45,8 +46,12 @@ class _ConnectDatabaseScreenState extends State<ConnectDatabaseScreen> {
                   ),
                 ),
                 ElevatedButton(
-                    onPressed: () =>
-                        debugPrint('IP $_ip Port $_port Key $_key'),
+                    onPressed: () {
+                      debugPrint('IP $_ip Port $_port Key $_key');
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const NotesScreen(),
+                      ));
+                    },
                     child: const Text('OK'))
               ]),
         ),

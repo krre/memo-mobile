@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'notes_screen.dart';
 
 class CreateDatabaseScreen extends StatefulWidget {
   const CreateDatabaseScreen({super.key});
@@ -30,7 +31,12 @@ class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
                   ),
                 ),
                 ElevatedButton(
-                    onPressed: () => debugPrint('Name $_name'),
+                    onPressed: () {
+                      debugPrint('Name $_name');
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const NotesScreen(),
+                      ));
+                    },
                     child: const Text('OK'))
               ]),
         ),

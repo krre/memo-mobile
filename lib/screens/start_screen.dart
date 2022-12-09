@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'create_database_screen.dart';
 import 'connect_database_screen.dart';
+import 'notes_screen.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -28,7 +29,9 @@ class StartScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  debugPrint('open database');
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const NotesScreen(),
+                  ));
                 },
                 child: Text(AppLocalizations.of(context)!.open),
               ),
