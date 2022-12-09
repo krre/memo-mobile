@@ -31,7 +31,7 @@ class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
                 ),
                 ElevatedButton(
                     onPressed: () => debugPrint('Name $_name'),
-                    child: const Text("OK"))
+                    child: const Text('OK'))
               ]),
         ),
       ),

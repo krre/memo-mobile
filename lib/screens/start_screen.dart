@@ -28,7 +28,7 @@ class StartScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  debugPrint("open database");
+                  debugPrint('open database');
                 },
                 child: Text(AppLocalizations.of(context)!.open),
               ),

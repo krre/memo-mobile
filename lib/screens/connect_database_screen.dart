@@ -47,7 +47,7 @@ class _ConnectDatabaseScreenState extends State<ConnectDatabaseScreen> {
                 ElevatedButton(
                     onPressed: () =>
                         debugPrint('IP $_ip Port $_port Key $_key'),
-                    child: const Text("OK"))
+                    child: const Text('OK'))
               ]),
         ),
       ),
