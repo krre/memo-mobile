@@ -17,8 +17,8 @@ class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.createDatabase)),
       body: Center(
         child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               TextField(
                 onChanged: (text) => _name = text,

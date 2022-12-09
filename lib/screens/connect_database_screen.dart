@@ -20,8 +20,8 @@ class _ConnectDatabaseScreenState extends State<ConnectDatabaseScreen> {
           AppBar(title: Text(AppLocalizations.of(context)!.connectDatabase)),
       body: Center(
         child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               TextField(
                 onChanged: (text) => _ip = text,
