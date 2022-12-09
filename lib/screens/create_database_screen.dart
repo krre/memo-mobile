@@ -9,8 +9,7 @@ class CreateDatabaseScreen extends StatefulWidget {
 }
 
 class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
-  late String _name;
-  bool _buttonEnabled = false;
+  String _name = '';
 
   @override
   Widget build(BuildContext context) {
@@ -22,22 +21,14 @@ class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
-                onChanged: (text) {
-                  _name = text;
-                  _buttonEnabled = text.isNotEmpty;
-                  setState(() {});
-                },
+                onChanged: (text) => _name = text,
                 autofocus: true,
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.name,
                 ),
               ),
               ElevatedButton(
-                  onPressed: _buttonEnabled
-                      ? () {
-                          debugPrint(_name);
-                        }
-                      : null,
+                  onPressed: () => debugPrint('Name $_name'),
                   child: const Text("OK"))
             ]),
       ),

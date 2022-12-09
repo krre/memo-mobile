@@ -24,40 +24,26 @@ class _ConnectDatabaseScreenState extends State<ConnectDatabaseScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
-                onChanged: (text) {
-                  _ip = text;
-                  setState(() {});
-                },
+                onChanged: (text) => _ip = text,
                 autofocus: true,
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.ip,
                 ),
               ),
               TextField(
-                onChanged: (text) {
-                  _port = text;
-                  setState(() {});
-                },
+                onChanged: (text) => _port = text,
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.port,
                 ),
               ),
               TextField(
-                onChanged: (text) {
-                  _key = text;
-                  setState(() {});
-                },
+                onChanged: (text) => _key = text,
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.key,
                 ),
               ),
               ElevatedButton(
-                  onPressed:
-                      _ip.isNotEmpty && _port.isNotEmpty && _key.isNotEmpty
-                          ? () {
-                              debugPrint(_ip);
-                            }
-                          : null,
+                  onPressed: () => debugPrint('IP $_ip Port $_port Key $_key'),
                   child: const Text("OK"))
             ]),
       ),
