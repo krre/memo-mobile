@@ -54,7 +54,7 @@ class _ConnectDatabaseScreenState extends State<ConnectDatabaseScreen> {
                         builder: (context) => const NotesScreen(),
                       ));
                     },
-                    child: const Text('OK'))
+                    child: Text(l10n.ok))
               ]),
         ),
       ),

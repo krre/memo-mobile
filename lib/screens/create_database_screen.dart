@@ -14,6 +14,8 @@ class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.createDatabase)),
       body: Center(
@@ -27,7 +29,7 @@ class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
                   onChanged: (text) => _name = text,
                   autofocus: true,
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.name,
+                    labelText: l10n!.name,
                   ),
                 ),
                 ElevatedButton(
@@ -38,7 +40,7 @@ class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
                         builder: (context) => const NotesScreen(),
                       ));
                     },
-                    child: const Text('OK'))
+                    child: Text(l10n.ok)
               ]),
         ),
       ),

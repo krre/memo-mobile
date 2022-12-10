@@ -9,5 +9,6 @@
     "ip": "IP address",
     "port": "Port",
     "key": "Key",
-    "notes": "Notes"
+    "notes": "Notes",
+    "ok": "OK"
 }
