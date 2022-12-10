@@ -32,7 +32,8 @@ class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      debugPrint('Name $_name');
+                      if (_name.isEmpty) return;
+
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const NotesScreen(),
                       ));

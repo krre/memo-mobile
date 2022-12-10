@@ -48,7 +48,8 @@ class _ConnectDatabaseScreenState extends State<ConnectDatabaseScreen> {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      debugPrint('IP $_ip Port $_port Key $_key');
+                      if (_ip.isEmpty || _port.isEmpty || _key.isEmpty) return;
+
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const NotesScreen(),
                       ));
