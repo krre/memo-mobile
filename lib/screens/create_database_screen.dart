@@ -41,7 +41,7 @@ class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
                         builder: (context) => const NotesScreen(),
                       ));
                     },
-                    child: Text(l10n.ok)
+                    child: Text(l10n.ok))
               ]),
         ),
       ),
