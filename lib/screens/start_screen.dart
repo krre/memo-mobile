@@ -9,9 +9,11 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.database),
+        title: Text(l10n!.database),
       ),
       body: Center(
         child: IntrinsicWidth(
@@ -25,7 +27,7 @@ class StartScreen extends StatelessWidget {
                     builder: (context) => const CreateDatabaseScreen(),
                   ));
                 },
-                child: Text(AppLocalizations.of(context)!.create),
+                child: Text(l10n.create),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -41,7 +43,7 @@ class StartScreen extends StatelessWidget {
                     builder: (context) => const ConnectDatabaseScreen(),
                   ));
                 },
-                child: Text(AppLocalizations.of(context)!.connect),
+                child: Text(l10n.connect),
               ),
             ],
           ),

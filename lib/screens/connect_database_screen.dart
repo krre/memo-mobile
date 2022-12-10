@@ -16,9 +16,10 @@ class _ConnectDatabaseScreenState extends State<ConnectDatabaseScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
-      appBar:
-          AppBar(title: Text(AppLocalizations.of(context)!.connectDatabase)),
+      appBar: AppBar(title: Text(l10n!.connectDatabase)),
       body: Center(
         child: Container(
           padding: const EdgeInsets.all(10),
@@ -30,19 +31,19 @@ class _ConnectDatabaseScreenState extends State<ConnectDatabaseScreen> {
                   onChanged: (text) => _ip = text,
                   autofocus: true,
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.ip,
+                    labelText: l10n.ip,
                   ),
                 ),
                 TextField(
                   onChanged: (text) => _port = text,
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.port,
+                    labelText: l10n.port,
                   ),
                 ),
                 TextField(
                   onChanged: (text) => _key = text,
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.key,
+                    labelText: l10n.key,
                   ),
                 ),
                 ElevatedButton(
