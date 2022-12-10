@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'notes_screen.dart';
 
 class CreateDatabaseScreen extends StatefulWidget {
