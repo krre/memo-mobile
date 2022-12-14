@@ -11,22 +11,9 @@ class NotesScreen extends StatefulWidget {
   }
 }
 
-Future<void> showNameDialog(BuildContext context) async {
-  final l10n = AppLocalizations.of(context);
-
-  return await showDialog(
-    context: context,
-    builder: (context) => AlertDialog(
-      title: Text(l10n!.name),
-      content: const TextField(
-        autofocus: true,
-      ),
-      actions: [ElevatedButton(onPressed: () {}, child: Text(l10n.ok))],
-    ),
-  );
-}
-
 class NotesScrenState extends State<NotesScreen> {
+  String _newNoteName = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,12 +21,37 @@ class NotesScrenState extends State<NotesScreen> {
         title: Text(AppLocalizations.of(context)!.notes),
         actions: [
           IconButton(
-              onPressed: () => showNameDialog(context),
+              onPressed: () => _showNameDialog(),
               icon: const Icon(Icons.add_box_outlined))
         ],
       ),
       body: TreeView(
         controller: TreeViewController(),
+      ),
+    );
+  }
+
+  Future<void> _showNameDialog() async {
+    final l10n = AppLocalizations.of(context);
+    _newNoteName = '';
+
+    return await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n!.name),
+        content: TextField(
+          onChanged: (value) => _newNoteName = value,
+          autofocus: true,
+        ),
+        actions: [
+          ElevatedButton(
+              onPressed: () {
+                if (_newNoteName.isEmpty) return;
+                debugPrint(_newNoteName);
+                Navigator.pop(context);
+              },
+              child: Text(l10n.ok))
+        ],
       ),
     );
   }
