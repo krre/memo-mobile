@@ -13,6 +13,7 @@ class NotesScreen extends StatefulWidget {
 
 class NotesScrenState extends State<NotesScreen> {
   String _newNoteName = '';
+  var _treeViewController = TreeViewController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +22,14 @@ class NotesScrenState extends State<NotesScreen> {
         title: Text(AppLocalizations.of(context)!.notes),
         actions: [
           IconButton(
-              onPressed: () => _showNameDialog(),
+              onPressed: () {
+                _showNameDialog();
+              },
               icon: const Icon(Icons.add_box_outlined))
         ],
       ),
       body: TreeView(
-        controller: TreeViewController(),
+        controller: _treeViewController,
       ),
     );
   }
@@ -47,7 +50,13 @@ class NotesScrenState extends State<NotesScreen> {
           ElevatedButton(
               onPressed: () {
                 if (_newNoteName.isEmpty) return;
-                debugPrint(_newNoteName);
+
+                setState(() {
+                  var children = _treeViewController.children.toList();
+                  children.add(Node(key: '2', label: _newNoteName));
+                  _treeViewController = TreeViewController(children: children);
+                });
+
                 Navigator.pop(context);
               },
               child: Text(l10n.ok))
