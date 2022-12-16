@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:memo/helpers/preferences.dart';
 
 import 'notes_screen.dart';
 
@@ -36,6 +37,7 @@ class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
                 ElevatedButton(
                     onPressed: () {
                       if (_name.isEmpty) return;
+                      Preferences.setDbPath(_name);
 
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const NotesScreen(),
