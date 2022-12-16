@@ -16,7 +16,11 @@ class Preferences {
     if (path == null) return false;
 
     // Test on db exists
-
     return true;
+  }
+
+  static Future<void> clearDbPath() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove("db");
   }
 }

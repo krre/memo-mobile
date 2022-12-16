@@ -10,5 +10,6 @@
     "port": "Port",
     "key": "Key",
     "notes": "Notes",
-    "ok": "OK"
+    "ok": "OK",
+    "exit": "Exit"
 }
