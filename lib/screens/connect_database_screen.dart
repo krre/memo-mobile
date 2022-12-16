@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'notes_screen.dart';
+import 'tree_screen.dart';
 
 class ConnectDatabaseScreen extends StatefulWidget {
   const ConnectDatabaseScreen({super.key});
@@ -53,7 +53,7 @@ class _ConnectDatabaseScreenState extends State<ConnectDatabaseScreen> {
 
                       Navigator.pushAndRemoveUntil(context,
                           MaterialPageRoute(builder: (BuildContext context) {
-                        return const NotesScreen();
+                        return const TreeScreen();
                       }), (r) {
                         return false;
                       });

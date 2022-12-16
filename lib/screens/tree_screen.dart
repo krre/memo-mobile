@@ -3,16 +3,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:memo/screens/notes_drawer.dart';
 
-class NotesScreen extends StatefulWidget {
-  const NotesScreen({super.key});
+class TreeScreen extends StatefulWidget {
+  const TreeScreen({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return NotesScrenState();
+    return TreeScrenState();
   }
 }
 
-class NotesScrenState extends State<NotesScreen> {
+class TreeScrenState extends State<TreeScreen> {
   String _newNoteName = '';
   var _treeViewController = TreeViewController();
 

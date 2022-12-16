@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:memo/helpers/preferences.dart';
-import 'package:memo/screens/notes_screen.dart';
+import 'package:memo/screens/tree_screen.dart';
 
 import 'screens/start_screen.dart';
 
@@ -31,7 +31,7 @@ class MemoApp extends StatelessWidget {
           builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
             return snapshot.data != true
                 ? const StartScreen()
-                : const NotesScreen();
+                : const TreeScreen();
           },
         ));
   }

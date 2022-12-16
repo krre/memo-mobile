@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:memo/helpers/preferences.dart';
 
-import 'notes_screen.dart';
+import 'tree_screen.dart';
 
 class CreateDatabaseScreen extends StatefulWidget {
   const CreateDatabaseScreen({super.key});
@@ -41,7 +41,7 @@ class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
 
                       Navigator.pushAndRemoveUntil(context,
                           MaterialPageRoute(builder: (BuildContext context) {
-                        return const NotesScreen();
+                        return const TreeScreen();
                       }), (r) {
                         return false;
                       });
