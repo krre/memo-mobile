@@ -51,9 +51,12 @@ class _ConnectDatabaseScreenState extends State<ConnectDatabaseScreen> {
                     onPressed: () {
                       if (_ip.isEmpty || _port.isEmpty || _key.isEmpty) return;
 
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const NotesScreen(),
-                      ));
+                      Navigator.pushAndRemoveUntil(context,
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return const NotesScreen();
+                      }), (r) {
+                        return false;
+                      });
                     },
                     child: Text(l10n.ok))
               ]),

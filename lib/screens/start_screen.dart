@@ -32,9 +32,12 @@ class StartScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const NotesScreen(),
-                  ));
+                  Navigator.pushAndRemoveUntil(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return const NotesScreen();
+                  }), (r) {
+                    return false;
+                  });
                 },
                 child: Text(AppLocalizations.of(context)!.open),
               ),
