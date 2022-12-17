@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:memo/helpers/preferences.dart';
+import 'package:memo/db/database.dart';
 
 import 'tree_screen.dart';
 
@@ -37,7 +37,13 @@ class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
                 ElevatedButton(
                     onPressed: () {
                       if (_name.isEmpty) return;
-                      Preferences.setDbPath(_name);
+
+                      try {
+                        Db.getInstance().create(_name);
+                      } catch (e) {
+                        debugPrint(e.toString());
+                        return;
+                      }
 
                       Navigator.pushAndRemoveUntil(context,
                           MaterialPageRoute(builder: (BuildContext context) {

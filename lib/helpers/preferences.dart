@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
-  static void setDbPath(String path) async {
+  static Future<void> setDbPath(String path) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString("db", path);
   }
