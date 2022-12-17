@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
+import 'package:memo/helpers/preferences.dart';
 import 'package:memo/screens/tree_drawer.dart';
+
+import '../db/database.dart';
+import '../globals.dart';
 
 class TreeScreen extends StatefulWidget {
   const TreeScreen({super.key});
@@ -15,6 +19,17 @@ class TreeScreen extends StatefulWidget {
 class TreeScrenState extends State<TreeScreen> {
   String _newNoteName = '';
   var _treeViewController = TreeViewController();
+
+  void _openDb() async {
+    final path = await Preferences.getDbPath();
+    await Db.getInstance().open(path!);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _openDb();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,16 +65,20 @@ class TreeScrenState extends State<TreeScreen> {
         ),
         actions: [
           ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_newNoteName.isEmpty) return;
+                final navigator = Navigator.of(context);
+
+                Id id =
+                    await Db.getInstance().insertNote(0, 0, 0, _newNoteName);
 
                 setState(() {
                   var children = _treeViewController.children.toList();
-                  children.add(Node(key: '2', label: _newNoteName));
+                  children.add(Node(key: id.toString(), label: _newNoteName));
                   _treeViewController = TreeViewController(children: children);
                 });
 
-                Navigator.pop(context);
+                navigator.pop();
               },
               child: Text(l10n.ok))
         ],

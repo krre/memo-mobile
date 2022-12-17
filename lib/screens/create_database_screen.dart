@@ -39,6 +39,7 @@ class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
                     onPressed: () async {
                       if (_name.isEmpty) return;
 
+                      final navigator = Navigator.of(context);
                       bool overwrite = false;
 
                       while (true) {
@@ -62,8 +63,7 @@ class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
                         }
                       }
 
-                      // ignore: use_build_context_synchronously
-                      await Navigator.pushAndRemoveUntil(context,
+                      await navigator.pushAndRemoveUntil(
                           MaterialPageRoute(builder: (BuildContext context) {
                         return const TreeScreen();
                       }), (r) {

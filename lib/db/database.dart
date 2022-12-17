@@ -4,6 +4,7 @@ import 'package:memo/db/migrater.dart' as migrater;
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../globals.dart';
 import '../helpers/preferences.dart';
 
 class DatabaseExistsException implements Exception {
@@ -55,5 +56,11 @@ class Db {
           "created_at TIMESTAMP DEFAULT (datetime('now', 'localtime')),"
           "updated_at TIMESTAMP DEFAULT (datetime('now', 'localtime')))");
     });
+  }
+
+  Future<Id> insertNote(Id parentId, int pos, int depth, String title) async {
+    return await _db.rawInsert(
+        'INSERT INTO notes (parent_id, pos, depth, title) VALUES (?, ?, ?, ?)',
+        [parentId, pos, depth, title]);
   }
 }
