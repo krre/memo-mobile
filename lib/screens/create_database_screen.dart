@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:memo/db/database.dart';
+import 'package:memo/widgets/confirm_dialog.dart';
 
 import 'tree_screen.dart';
 
@@ -35,17 +36,34 @@ class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
                   ),
                 ),
                 ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_name.isEmpty) return;
 
-                      try {
-                        Db.getInstance().create(_name);
-                      } on DatabaseExistsException catch (e) {
-                        debugPrint(e.toString());
-                        return;
+                      bool overwrite = false;
+
+                      while (true) {
+                        try {
+                          await Db.getInstance()
+                              .create(_name, overwrite: overwrite);
+                          break;
+                        } on DatabaseExistsException catch (_) {
+                          bool? result = await showDialog<bool>(
+                              context: context,
+                              builder: (BuildContext context) => ConfirmDialog(
+                                    title: l10n.databaseExists,
+                                    description: l10n.overwrite,
+                                  ));
+
+                          if (result!) {
+                            overwrite = true;
+                          } else {
+                            return;
+                          }
+                        }
                       }
 
-                      Navigator.pushAndRemoveUntil(context,
+                      // ignore: use_build_context_synchronously
+                      await Navigator.pushAndRemoveUntil(context,
                           MaterialPageRoute(builder: (BuildContext context) {
                         return const TreeScreen();
                       }), (r) {

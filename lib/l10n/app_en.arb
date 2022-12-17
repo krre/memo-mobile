@@ -11,5 +11,8 @@
     "key": "Key",
     "notes": "Notes",
     "ok": "OK",
-    "exit": "Exit"
+    "cancel": "Cancel",
+    "exit": "Exit",
+    "databaseExists": "Database already exists",
+    "overwrite": "Overwrite?"
 }

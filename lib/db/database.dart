@@ -26,12 +26,12 @@ class Db {
     return _instance!;
   }
 
-  void create(String name) async {
+  Future<void> create(String name, {bool overwrite = false}) async {
     var databasesPath = await getDatabasesPath();
     await Directory(databasesPath).create(recursive: true);
     String path = join(databasesPath, '$name.db');
 
-    if (await File(path).exists()) {
+    if (await File(path).exists() && !overwrite) {
       throw DatabaseExistsException(name);
     }
 
@@ -41,7 +41,7 @@ class Db {
     Preferences.setDbPath(path);
   }
 
-  void open(String path) async {
+  Future<void> open(String path) async {
     _db = await openDatabase(path, version: migrater.version,
         onCreate: (Database db, int version) async {
       await db.execute("CREATE TABLE notes("
