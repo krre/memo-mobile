@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
-import 'package:memo/screens/notes_drawer.dart';
+import 'package:memo/screens/tree_drawer.dart';
 
 class TreeScreen extends StatefulWidget {
   const TreeScreen({super.key});
@@ -32,7 +32,7 @@ class TreeScrenState extends State<TreeScreen> {
       body: TreeView(
         controller: _treeViewController,
       ),
-      drawer: const NotesDrawer(),
+      drawer: const TreeDrawer(),
     );
   }
 

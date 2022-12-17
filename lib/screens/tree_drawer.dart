@@ -6,8 +6,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:memo/helpers/preferences.dart';
 import 'package:memo/screens/start_screen.dart';
 
-class NotesDrawer extends StatelessWidget {
-  const NotesDrawer({super.key});
+class TreeDrawer extends StatelessWidget {
+  const TreeDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
