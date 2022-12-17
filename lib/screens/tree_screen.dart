@@ -20,15 +20,27 @@ class TreeScrenState extends State<TreeScreen> {
   String _newNoteName = '';
   var _treeViewController = TreeViewController();
 
-  void _openDb() async {
+  void _loadTree() async {
     final path = await Preferences.getDbPath();
     await Db.getInstance().open(path!);
+
+    final titles = await Db.getInstance().getTitles();
+    var children = _treeViewController.children.toList();
+
+    for (final title in titles) {
+      children.add(
+          Node(key: title['id'].toString(), label: title['title'].toString()));
+    }
+
+    setState(() {
+      _treeViewController = TreeViewController(children: children);
+    });
   }
 
   @override
   void initState() {
     super.initState();
-    _openDb();
+    _loadTree();
   }
 
   @override

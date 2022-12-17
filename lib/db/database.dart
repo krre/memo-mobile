@@ -63,4 +63,9 @@ class Db {
         'INSERT INTO notes (parent_id, pos, depth, title) VALUES (?, ?, ?, ?)',
         [parentId, pos, depth, title]);
   }
+
+  Future<List<Map<String, Object?>>> getTitles() async {
+    return await _db.rawQuery(
+        'SELECT id, parent_id, pos, depth, title FROM notes ORDER BY depth, pos');
+  }
 }
