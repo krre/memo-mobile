@@ -40,7 +40,7 @@ class _CreateDatabaseScreenState extends State<CreateDatabaseScreen> {
 
                       try {
                         Db.getInstance().create(_name);
-                      } catch (e) {
+                      } on DatabaseExistsException catch (e) {
                         debugPrint(e.toString());
                         return;
                       }

@@ -6,6 +6,17 @@ import 'package:sqflite/sqflite.dart';
 
 import '../helpers/preferences.dart';
 
+class DatabaseExistsException implements Exception {
+  late final String name;
+
+  DatabaseExistsException(this.name);
+
+  @override
+  String toString() {
+    return 'Database exists witn name $name';
+  }
+}
+
 class Db {
   static Db? _instance;
   late Database _db;
@@ -19,6 +30,10 @@ class Db {
     var databasesPath = await getDatabasesPath();
     await Directory(databasesPath).create(recursive: true);
     String path = join(databasesPath, '$name.db');
+
+    if (await File(path).exists()) {
+      throw DatabaseExistsException(name);
+    }
 
     await deleteDatabase(path);
     open(path);
