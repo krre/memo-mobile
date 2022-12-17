@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:memo/db/database.dart';
 import 'package:memo/widgets/confirm_dialog.dart';
 
-import 'tree_screen.dart';
+import 'tree/tree_screen.dart';
 
 class CreateDatabaseScreen extends StatefulWidget {
   const CreateDatabaseScreen({super.key});
