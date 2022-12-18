@@ -21,6 +21,7 @@ class DatabaseExistsException implements Exception {
 class Db {
   static Db? _instance;
   late Database _db;
+  bool _isOpen = false;
 
   static Db getInstance() {
     _instance ??= Db();
@@ -33,7 +34,7 @@ class Db {
   }
 
   bool isOpen() {
-    return _db.isOpen;
+    return _isOpen;
   }
 
   Future<void> create(String name, {bool overwrite = false}) async {
@@ -46,12 +47,11 @@ class Db {
     }
 
     await deleteDatabase(path);
-    open(path);
-
-    Preferences.setDbPath(path);
+    await open(name);
   }
 
-  Future<void> open(String path) async {
+  Future<void> open(String name) async {
+    String path = await nameToPath(name);
     _db = await openDatabase(path, version: migrater.version,
         onCreate: (Database db, int version) async {
       await db.execute("CREATE TABLE notes("
@@ -65,6 +65,9 @@ class Db {
           "created_at TIMESTAMP DEFAULT (datetime('now', 'localtime')),"
           "updated_at TIMESTAMP DEFAULT (datetime('now', 'localtime')))");
     });
+
+    _isOpen = true;
+    await Preferences.setDbName(name);
   }
 
   Future<Id> insertNote(Id parentId, int pos, int depth, String title) async {

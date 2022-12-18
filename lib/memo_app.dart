@@ -27,9 +27,9 @@ class MemoApp extends StatelessWidget {
           primarySwatch: Colors.orange,
         ),
         home: FutureBuilder(
-          future: Preferences.dbExists(),
-          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-            return snapshot.data != true
+          future: Preferences.getDbName(),
+          builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+            return snapshot.data == null
                 ? const StartScreen()
                 : const TreeScreen();
           },

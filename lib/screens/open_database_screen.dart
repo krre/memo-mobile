@@ -50,8 +50,7 @@ class _OpenDatabaseScreenState extends State<OpenDatabaseScreen> {
               onTap: () async {
                 final navigator = Navigator.of(context);
 
-                final path = await Db.nameToPath(_databases[index]);
-                Db.getInstance().open(path);
+                await Db.getInstance().open(_databases[index]);
 
                 await navigator.pushAndRemoveUntil(
                     MaterialPageRoute(builder: (BuildContext context) {

@@ -20,8 +20,8 @@ class TreeScrenState extends State<TreeScreen> {
 
   void _loadTree() async {
     if (!Db.getInstance().isOpen()) {
-      final path = await Preferences.getDbPath();
-      await Db.getInstance().open(path!);
+      final name = await Preferences.getDbName();
+      await Db.getInstance().open(name!);
     }
 
     final titles = await Db.getInstance().getTitles();
@@ -47,7 +47,13 @@ class TreeScrenState extends State<TreeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.notes),
+        title: FutureBuilder(
+            future: Preferences.getDbName(),
+            builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+              return snapshot.data == null
+                  ? Text(AppLocalizations.of(context)!.notes)
+                  : Text(snapshot.data!);
+            }),
         actions: [
           IconButton(
               onPressed: () async {

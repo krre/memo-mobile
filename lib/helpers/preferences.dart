@@ -1,26 +1,35 @@
+import 'dart:io';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../db/database.dart';
+
+const _dbKey = 'db';
+
 class Preferences {
-  static Future<void> setDbPath(String path) async {
+  static Future<void> setDbName(String name) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString("db", path);
+    prefs.setString(_dbKey, name);
   }
 
-  static Future<String?> getDbPath() async {
+  static Future<String?> getDbName() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString("db");
+    final name = prefs.getString(_dbKey);
+
+    if (name == null) return null;
+
+    String path = await Db.nameToPath(name);
+
+    if (await File(path).exists()) {
+      return name;
+    }
+
+    prefs.remove(_dbKey);
+    return null;
   }
 
-  static Future<bool> dbExists() async {
-    var path = await getDbPath();
-    if (path == null) return false;
-
-    // Test on db exists
-    return true;
-  }
-
-  static Future<void> clearDbPath() async {
+  static Future<void> clearDbName() async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.remove("db");
+    prefs.remove(_dbKey);
   }
 }

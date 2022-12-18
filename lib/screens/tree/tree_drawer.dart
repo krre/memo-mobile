@@ -28,7 +28,7 @@ class TreeDrawer extends StatelessWidget {
           ListTile(
             title: Text(l10n.exit),
             onTap: () {
-              Preferences.clearDbPath();
+              Preferences.clearDbName();
 
               if (Platform.isAndroid) {
                 SystemNavigator.pop();
