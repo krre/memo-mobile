@@ -113,6 +113,7 @@ class TreeScrenState extends State<TreeScreen> {
       ),
       body: TreeView(
         controller: _treeViewController,
+        allowParentSelect: true,
         onNodeTap: (key) {
           setState(() {
             _treeViewController =
