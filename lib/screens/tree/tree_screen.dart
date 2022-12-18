@@ -71,6 +71,12 @@ class TreeScrenState extends State<TreeScreen> {
       ),
       body: TreeView(
         controller: _treeViewController,
+        onNodeTap: (key) {
+          setState(() {
+            _treeViewController =
+                _treeViewController.copyWith(selectedKey: key);
+          });
+        },
       ),
       drawer: const TreeDrawer(),
     );
