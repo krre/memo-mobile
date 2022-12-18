@@ -28,13 +28,36 @@ class TreeScrenState extends State<TreeScreen> {
     var children = _treeViewController.children.toList();
 
     for (final title in titles) {
-      children.add(
-          Node(key: title['id'].toString(), label: title['title'].toString()));
+      final parentId = title['parent_id'].toString();
+      final node =
+          Node(key: title['id'].toString(), label: title['title'].toString());
+
+      if (parentId == '0') {
+        children.add(node);
+        _treeViewController = TreeViewController(children: children);
+      } else {
+        _treeViewController = _treeViewController.withAddNode(parentId, node);
+      }
     }
 
-    setState(() {
-      _treeViewController = TreeViewController(children: children);
-    });
+    setState(() {});
+  }
+
+  int _depth() {
+    if (_treeViewController.selectedKey == null) return 0;
+    Node<dynamic>? node = _treeViewController.selectedNode;
+    int counter = 0;
+
+    String key = '';
+
+    while (node != null && key != node.key) {
+      key = node.key;
+      node = _treeViewController.getParent(node.key);
+
+      counter++;
+    }
+
+    return counter;
   }
 
   @override
@@ -61,16 +84,29 @@ class TreeScrenState extends State<TreeScreen> {
                     context: context,
                     builder: (context) => const NewNoteDialog());
 
-                if (name != null) {
-                  Id id = await Db.getInstance().insertNote(0, 0, 0, name);
+                if (name == null) return;
 
-                  setState(() {
+                final depth = _depth();
+                final parentId = _treeViewController.selectedKey != null
+                    ? int.parse(_treeViewController.selectedKey!)
+                    : 0;
+
+                Id id =
+                    await Db.getInstance().insertNote(parentId, 0, depth, name);
+
+                final node = Node(key: id.toString(), label: name);
+
+                setState(() {
+                  if (parentId == 0) {
                     var children = _treeViewController.children.toList();
-                    children.add(Node(key: id.toString(), label: name));
+                    children.add(node);
                     _treeViewController =
                         TreeViewController(children: children);
-                  });
-                }
+                  } else {
+                    _treeViewController = _treeViewController.withAddNode(
+                        parentId.toString(), node);
+                  }
+                });
               },
               icon: const Icon(Icons.add_box_outlined))
         ],
