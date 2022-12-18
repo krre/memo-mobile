@@ -12,9 +12,7 @@ class TreeScreen extends StatefulWidget {
   const TreeScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() {
-    return TreeScrenState();
-  }
+  State<StatefulWidget> createState() => TreeScrenState();
 }
 
 class TreeScrenState extends State<TreeScreen> {

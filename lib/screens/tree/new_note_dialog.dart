@@ -5,9 +5,7 @@ class NewNoteDialog extends StatefulWidget {
   const NewNoteDialog({super.key});
 
   @override
-  State<StatefulWidget> createState() {
-    return NewNoteDialogState();
-  }
+  State<StatefulWidget> createState() => NewNoteDialogState();
 }
 
 class NewNoteDialogState extends State<NewNoteDialog> {
