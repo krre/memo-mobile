@@ -5,6 +5,7 @@
     "connect": "Connect",
     "createDatabase": "Create Database",
     "connectDatabase": "Connect to Database",
+    "openDatabase": "Open Database",
     "name": "Name",
     "ip": "IP address",
     "port": "Port",

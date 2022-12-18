@@ -23,7 +23,6 @@ class TreeDrawer extends StatelessWidget {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => const StartScreen(),
               ));
-              // Navigator.pop(context);
             },
           ),
           ListTile(
@@ -36,7 +35,6 @@ class TreeDrawer extends StatelessWidget {
               } else if (Platform.isIOS) {
                 exit(0);
               }
-              // Navigator.pop(context);
             },
           ),
         ],

@@ -27,10 +27,19 @@ class Db {
     return _instance!;
   }
 
+  static Future<String> nameToPath(String name) async {
+    var databasesPath = await getDatabasesPath();
+    return join(databasesPath, '$name.db');
+  }
+
+  bool isOpen() {
+    return _db.isOpen;
+  }
+
   Future<void> create(String name, {bool overwrite = false}) async {
     var databasesPath = await getDatabasesPath();
     await Directory(databasesPath).create(recursive: true);
-    String path = join(databasesPath, '$name.db');
+    String path = await nameToPath(name);
 
     if (await File(path).exists() && !overwrite) {
       throw DatabaseExistsException(name);

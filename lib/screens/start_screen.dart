@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'create_database_screen.dart';
 import 'connect_database_screen.dart';
-import 'tree/tree_screen.dart';
+import 'open_database_screen.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -32,12 +32,9 @@ class StartScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushAndRemoveUntil(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                    return const TreeScreen();
-                  }), (r) {
-                    return false;
-                  });
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const OpenDatabaseScreen(),
+                  ));
                 },
                 child: Text(AppLocalizations.of(context)!.open),
               ),

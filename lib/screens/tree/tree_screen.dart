@@ -19,8 +19,10 @@ class TreeScrenState extends State<TreeScreen> {
   var _treeViewController = TreeViewController();
 
   void _loadTree() async {
-    final path = await Preferences.getDbPath();
-    await Db.getInstance().open(path!);
+    if (!Db.getInstance().isOpen()) {
+      final path = await Preferences.getDbPath();
+      await Db.getInstance().open(path!);
+    }
 
     final titles = await Db.getInstance().getTitles();
     var children = _treeViewController.children.toList();
