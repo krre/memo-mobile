@@ -106,6 +106,11 @@ class TreeScrenState extends State<TreeScreen> {
                     _treeViewController = _treeViewController.withAddNode(
                         parentId.toString(), node);
                   }
+
+                  _treeViewController =
+                      _treeViewController.withExpandToNode(id.toString());
+                  _treeViewController =
+                      _treeViewController.copyWith(selectedKey: id.toString());
                 });
               },
               icon: const Icon(Icons.add_box_outlined))
