@@ -17,6 +17,8 @@ class TreeScreen extends StatefulWidget {
 
 class TreeScrenState extends State<TreeScreen> {
   var _treeViewController = TreeViewController();
+  late Offset _tapDownPosition;
+  static const _emptyKey = '0';
 
   void _loadTree() async {
     if (!Db.getInstance().isOpen()) {
@@ -58,6 +60,35 @@ class TreeScrenState extends State<TreeScreen> {
     }
 
     return counter;
+  }
+
+  void _showNodeMenu(BuildContext context) {
+    if (_treeViewController.selectedKey == null ||
+        _treeViewController.selectedKey == _emptyKey) return;
+
+    final l10n = AppLocalizations.of(context);
+    final RenderBox overlay =
+        Overlay.of(context)!.context.findRenderObject() as RenderBox;
+
+    showMenu(
+        context: context,
+        position: RelativeRect.fromLTRB(
+          _tapDownPosition.dx,
+          _tapDownPosition.dy,
+          overlay.size.width - _tapDownPosition.dx,
+          overlay.size.height - _tapDownPosition.dy,
+        ),
+        items: <PopupMenuEntry>[
+          PopupMenuItem(
+            child: Row(children: [const Icon(Icons.delete), Text(l10n!.open)]),
+          ),
+          PopupMenuItem(
+            child: Row(children: [const Icon(Icons.delete), Text(l10n.rename)]),
+          ),
+          PopupMenuItem(
+            child: Row(children: [const Icon(Icons.delete), Text(l10n.delete)]),
+          )
+        ]);
   }
 
   @override
@@ -117,10 +148,14 @@ class TreeScrenState extends State<TreeScreen> {
         ],
       ),
       body: GestureDetector(
+        onLongPress: () => _showNodeMenu(context),
+        onTapDown: (TapDownDetails details) {
+          _tapDownPosition = details.globalPosition;
+        },
         onTap: () {
           setState(() {
             _treeViewController =
-                _treeViewController.copyWith(selectedKey: "0");
+                _treeViewController.copyWith(selectedKey: _emptyKey);
           });
         },
         child: TreeView(
