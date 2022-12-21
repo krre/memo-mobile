@@ -7,6 +7,7 @@ import 'package:memo/screens/tree/tree_drawer.dart';
 
 import '../../db/database.dart';
 import '../../globals.dart';
+import '../../widgets/confirm_dialog.dart';
 
 class TreeScreen extends StatefulWidget {
   const TreeScreen({super.key});
@@ -86,6 +87,20 @@ class TreeScrenState extends State<TreeScreen> {
             child: Row(children: [const Icon(Icons.delete), Text(l10n.rename)]),
           ),
           PopupMenuItem(
+            onTap: () {
+              Future.delayed(const Duration(seconds: 0), () async {
+                bool? result = await showDialog<bool>(
+                    context: context,
+                    builder: (BuildContext context) => ConfirmDialog(
+                          title: l10n.deleteNote,
+                          description: '',
+                        ));
+
+                if (result != null && result) {
+                  print('delete note');
+                }
+              });
+            },
             child: Row(children: [const Icon(Icons.delete), Text(l10n.delete)]),
           )
         ]);

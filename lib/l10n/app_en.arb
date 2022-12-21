@@ -17,5 +17,6 @@
     "databaseExists": "Database already exists",
     "overwrite": "Overwrite?",
     "delete": "Delete",
-    "rename": "Rename"
+    "rename": "Rename",
+    "deleteNote": "Delete note?"
 }
