@@ -97,13 +97,40 @@ class TreeScrenState extends State<TreeScreen> {
                         ));
 
                 if (result != null && result) {
-                  print('delete note');
+                  _deleteNode();
                 }
               });
             },
             child: Row(children: [const Icon(Icons.delete), Text(l10n.delete)]),
           )
         ]);
+  }
+
+  List<Id> collectChilds(Id parentId) {
+    List<Id> result = [];
+    result.add(parentId);
+
+    final node = _treeViewController.getNode(parentId.toString())!;
+
+    for (Node child in node.children) {
+      result.addAll(collectChilds(int.parse(child.key)));
+    }
+
+    return result;
+  }
+
+  void _deleteNode() async {
+    String key = _treeViewController.selectedKey!;
+    Id id = int.parse(key);
+    List<Id> ids = collectChilds(id);
+
+    for (Id id in ids) {
+      await Db.getInstance().deleteNote(id);
+    }
+
+    setState(() {
+      _treeViewController = _treeViewController.withDeleteNode(key);
+    });
   }
 
   @override

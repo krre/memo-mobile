@@ -80,4 +80,8 @@ class Db {
     return await _db.rawQuery(
         'SELECT id, parent_id, pos, depth, title FROM notes ORDER BY depth, pos');
   }
+
+  Future<void> deleteNote(Id id) async {
+    await _db.rawDelete('DELETE FROM notes WHERE id = ?', [id]);
+  }
 }
