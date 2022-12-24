@@ -142,6 +142,34 @@ class TreeScrenState extends State<TreeScreen> {
     });
   }
 
+  void _insertNode(String? name) async {
+    if (name == null) return;
+
+    final depth = _depth();
+    final parentId = _treeViewController.selectedKey != null
+        ? int.parse(_treeViewController.selectedKey!)
+        : 0;
+
+    Id id = await Db.getInstance().insertNote(parentId, 0, depth, name);
+
+    final node = Node(key: id.toString(), label: name);
+
+    setState(() {
+      if (parentId == 0) {
+        var children = _treeViewController.children.toList();
+        children.add(node);
+        _treeViewController = TreeViewController(children: children);
+      } else {
+        _treeViewController =
+            _treeViewController.withAddNode(parentId.toString(), node);
+      }
+
+      _treeViewController = _treeViewController.withExpandToNode(id.toString());
+      _treeViewController =
+          _treeViewController.copyWith(selectedKey: id.toString());
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -165,35 +193,7 @@ class TreeScrenState extends State<TreeScreen> {
                 final name = await showDialog<String>(
                     context: context,
                     builder: (context) => const NewNoteDialog());
-
-                if (name == null) return;
-
-                final depth = _depth();
-                final parentId = _treeViewController.selectedKey != null
-                    ? int.parse(_treeViewController.selectedKey!)
-                    : 0;
-
-                Id id =
-                    await Db.getInstance().insertNote(parentId, 0, depth, name);
-
-                final node = Node(key: id.toString(), label: name);
-
-                setState(() {
-                  if (parentId == 0) {
-                    var children = _treeViewController.children.toList();
-                    children.add(node);
-                    _treeViewController =
-                        TreeViewController(children: children);
-                  } else {
-                    _treeViewController = _treeViewController.withAddNode(
-                        parentId.toString(), node);
-                  }
-
-                  _treeViewController =
-                      _treeViewController.withExpandToNode(id.toString());
-                  _treeViewController =
-                      _treeViewController.copyWith(selectedKey: id.toString());
-                });
+                _insertNode(name);
               },
               icon: const Icon(Icons.add_box_outlined))
         ],
