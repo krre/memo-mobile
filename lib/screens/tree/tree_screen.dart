@@ -84,6 +84,22 @@ class TreeScrenState extends State<TreeScreen> {
             child: Row(children: [const Icon(Icons.delete), Text(l10n!.open)]),
           ),
           PopupMenuItem(
+            onTap: () {
+              Future.delayed(const Duration(seconds: 0), () async {
+                String label = _treeViewController
+                    .getNode(_treeViewController.selectedKey!)!
+                    .label;
+                final name = await showDialog<String>(
+                    context: context,
+                    builder: (context) => NoteNameDialog(
+                          name: label,
+                        ));
+
+                if (name != null) {
+                  print('name $name');
+                }
+              });
+            },
             child: Row(children: [const Icon(Icons.delete), Text(l10n.rename)]),
           ),
           PopupMenuItem(
