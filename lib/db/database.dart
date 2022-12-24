@@ -54,18 +54,34 @@ class Db {
     String path = await nameToPath(name);
     _db = await openDatabase(path, version: migrater.version,
         onCreate: (Database db, int version) async {
-      await db.execute("CREATE TABLE notes("
-          "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-          "parent_id INTEGER,"
-          "pos INTEGER,"
-          "depth INTEGER,"
-          "title TEXT,"
-          "note TEXT,"
-          "line INTEGER,"
-          "created_at TIMESTAMP DEFAULT (datetime('now', 'localtime')),"
-          "updated_at TIMESTAMP DEFAULT (datetime('now', 'localtime')))");
-    });
+      await db.transaction((txn) async {
+        txn.execute("""
+          CREATE TABLE notes(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            parent_id INTEGER,
+            pos INTEGER,
+            depth INTEGER,
+            title TEXT,
+            note TEXT,
+            line INTEGER,
+            created_at TIMESTAMP DEFAULT (datetime('now', 'localtime')),
+            updated_at TIMESTAMP DEFAULT (datetime('now', 'localtime'))
+          );
+        """);
 
+        txn.execute("""
+          CREATE TABLE meta(
+            version INTEGER,
+            selected_id INTEGER,
+            remote_database TEXT
+          );
+        """);
+
+        txn.execute("""
+          INSERT INTO meta (version, selected_id, remote_database) VALUES (1, 0, '{}');
+        """);
+      });
+    });
     _isOpen = true;
     await Preferences.setDbName(name);
   }
