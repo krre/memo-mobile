@@ -96,7 +96,7 @@ class TreeScrenState extends State<TreeScreen> {
                         ));
 
                 if (name != null) {
-                  print('name $name');
+                  _updateTitle(name);
                 }
               });
             },
@@ -185,6 +185,18 @@ class TreeScrenState extends State<TreeScreen> {
       _treeViewController = _treeViewController.withExpandToNode(id.toString());
       _treeViewController =
           _treeViewController.copyWith(selectedKey: id.toString());
+    });
+  }
+
+  void _updateTitle(String name) async {
+    String key = _treeViewController.selectedKey!;
+    await Db.getInstance().updateValue(int.parse(key), 'title', name);
+
+    setState(() {
+      final node = _treeViewController.getNode(key)!;
+      Node updatedNode = node.copyWith(key: key, label: name);
+      _treeViewController =
+          _treeViewController.withUpdateNode(key, updatedNode);
     });
   }
 
