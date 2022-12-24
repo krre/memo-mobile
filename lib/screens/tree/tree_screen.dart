@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:memo/helpers/preferences.dart';
-import 'package:memo/screens/tree/new_note_dialog.dart';
+import 'package:memo/screens/tree/note_name_dialog.dart';
 import 'package:memo/screens/tree/tree_drawer.dart';
 
 import '../../db/database.dart';
@@ -194,7 +194,7 @@ class TreeScrenState extends State<TreeScreen> {
               onPressed: () async {
                 final name = await showDialog<String>(
                     context: context,
-                    builder: (context) => const NewNoteDialog());
+                    builder: (context) => const NoteNameDialog());
 
                 if (name != null) {
                   _insertNode(name);

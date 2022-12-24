@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class NewNoteDialog extends StatefulWidget {
-  const NewNoteDialog({super.key});
+class NoteNameDialog extends StatefulWidget {
+  const NoteNameDialog({super.key});
 
   @override
-  State<StatefulWidget> createState() => NewNoteDialogState();
+  State<StatefulWidget> createState() => NoteNameDialogState();
 }
 
-class NewNoteDialogState extends State<NewNoteDialog> {
+class NoteNameDialogState extends State<NoteNameDialog> {
   String _name = '';
 
   @override
