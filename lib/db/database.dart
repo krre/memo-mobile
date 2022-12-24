@@ -84,4 +84,11 @@ class Db {
   Future<void> deleteNote(Id id) async {
     await _db.rawDelete('DELETE FROM notes WHERE id = ?', [id]);
   }
+
+  Future<void> updateValue(Id id, String name, dynamic value) async {
+    String updateDate =
+        name == 'note' ? ", updated_at = datetime('now', 'localtime')" : '';
+    await _db.rawUpdate(
+        'UPDATE notes SET $name = ? $updateDate WHERE id = ?', [value, id]);
+  }
 }

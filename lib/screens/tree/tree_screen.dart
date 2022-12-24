@@ -121,15 +121,24 @@ class TreeScrenState extends State<TreeScreen> {
 
   void _deleteNode() async {
     String key = _treeViewController.selectedKey!;
-    Id id = int.parse(key);
-    List<Id> ids = collectChilds(id);
+    List<Id> ids = collectChilds(int.parse(key));
 
     for (Id id in ids) {
       await Db.getInstance().deleteNote(id);
     }
 
+    final parent = _treeViewController.getParent(key);
+
     setState(() {
       _treeViewController = _treeViewController.withDeleteNode(key);
+    });
+
+    final nodes =
+        parent!.key == key ? _treeViewController.children : parent.children;
+
+    nodes.asMap().forEach((index, node) async {
+      final id = int.parse(node.key);
+      await Db.getInstance().updateValue(id, 'pos', index);
     });
   }
 
