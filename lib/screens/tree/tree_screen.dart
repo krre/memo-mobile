@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:memo/helpers/preferences.dart';
+import 'package:memo/screens/note_screen.dart';
 import 'package:memo/screens/tree/note_name_dialog.dart';
 import 'package:memo/screens/tree/tree_drawer.dart';
 
@@ -81,6 +82,16 @@ class TreeScrenState extends State<TreeScreen> {
         ),
         items: <PopupMenuEntry>[
           PopupMenuItem(
+            onTap: () {
+              Future.delayed(const Duration(seconds: 0), () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return NoteScreen(
+                        id: int.parse(_treeViewController.selectedKey!));
+                  },
+                ));
+              });
+            },
             child: Row(children: [const Icon(Icons.delete), Text(l10n!.open)]),
           ),
           PopupMenuItem(

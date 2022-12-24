@@ -91,4 +91,10 @@ class Db {
     await _db.rawUpdate(
         'UPDATE notes SET $name = ? $updateDate WHERE id = ?', [value, id]);
   }
+
+  Future<dynamic> getValue(Id id, String name) async {
+    final rows =
+        await _db.rawQuery('SELECT $name FROM notes WHERE id = ?', [id]);
+    return rows.first[name];
+  }
 }
