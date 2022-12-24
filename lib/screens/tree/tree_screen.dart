@@ -144,13 +144,16 @@ class TreeScrenState extends State<TreeScreen> {
 
   void _insertNode(String? name) async {
     if (name == null) return;
+    final key = _treeViewController.selectedKey;
 
     final depth = _depth();
-    final parentId = _treeViewController.selectedKey != null
-        ? int.parse(_treeViewController.selectedKey!)
-        : 0;
+    final parentId = key != null ? int.parse(key) : 0;
 
-    Id id = await Db.getInstance().insertNote(parentId, 0, depth, name);
+    final pos = parentId == 0
+        ? _treeViewController.children.length
+        : _treeViewController.getParent(key!)!.children.length;
+
+    Id id = await Db.getInstance().insertNote(parentId, pos, depth, name);
 
     final node = Node(key: id.toString(), label: name);
 
