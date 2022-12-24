@@ -142,8 +142,7 @@ class TreeScrenState extends State<TreeScreen> {
     });
   }
 
-  void _insertNode(String? name) async {
-    if (name == null) return;
+  void _insertNode(String name) async {
     final key = _treeViewController.selectedKey;
 
     final depth = _depth();
@@ -196,7 +195,10 @@ class TreeScrenState extends State<TreeScreen> {
                 final name = await showDialog<String>(
                     context: context,
                     builder: (context) => const NewNoteDialog());
-                _insertNode(name);
+
+                if (name != null) {
+                  _insertNode(name);
+                }
               },
               icon: const Icon(Icons.add_box_outlined))
         ],
