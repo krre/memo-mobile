@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:memo/net/network.dart';
 
+import '../db/database.dart';
 import 'tree/tree_screen.dart';
 
 class ConnectDatabaseScreen extends StatefulWidget {
@@ -14,6 +16,16 @@ class _ConnectDatabaseScreenState extends State<ConnectDatabaseScreen> {
   String _ip = '';
   String _port = '';
   String _key = '';
+  final _network = Network();
+
+  Future<void> _connectToRemoteDatabase() async {
+    _network.ip = _ip;
+    _network.port = int.parse(_port);
+    _network.key = _key;
+
+    final name = await _network.fetchName();
+    await Db.getInstance().create(name, overwrite: true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +60,12 @@ class _ConnectDatabaseScreenState extends State<ConnectDatabaseScreen> {
                   ),
                 ),
                 ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_ip.isEmpty || _port.isEmpty || _key.isEmpty) return;
+                      final navigator = Navigator.of(context);
+                      await _connectToRemoteDatabase();
 
-                      Navigator.pushAndRemoveUntil(context,
+                      navigator.pushAndRemoveUntil(
                           MaterialPageRoute(builder: (BuildContext context) {
                         return const TreeScreen();
                       }), (r) {
