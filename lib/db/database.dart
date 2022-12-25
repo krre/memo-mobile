@@ -59,6 +59,7 @@ class Db {
           CREATE TABLE notes(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             parent_id INTEGER,
+            remote_id INTEGER,
             pos INTEGER,
             depth INTEGER,
             title TEXT,
