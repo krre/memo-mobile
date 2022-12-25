@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:memo/net/network.dart';
@@ -25,6 +27,15 @@ class _ConnectDatabaseScreenState extends State<ConnectDatabaseScreen> {
 
     final name = await _network.fetchName();
     await Db.getInstance().create(name, overwrite: true);
+
+    final notes = await _network.fetchNotes();
+
+    for (final note in notes) {
+      final decodedTitle = utf8.decode(base64.decode(note['title'] ?? ''));
+      final decodedNote = utf8.decode(base64.decode(note['note'] ?? ''));
+      await Db.getInstance().insertRemoteNote(note['id'], note['parentId'],
+          note['pos'], note['depth'], decodedTitle, decodedNote);
+    }
   }
 
   @override

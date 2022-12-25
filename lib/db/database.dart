@@ -93,6 +93,13 @@ class Db {
         [parentId, pos, depth, title]);
   }
 
+  Future<Id> insertRemoteNote(
+      Id id, Id parentId, int pos, int depth, String title, String note) async {
+    return await _db.rawInsert(
+        'INSERT INTO notes (id, parent_id, pos, depth, title, note) VALUES (?, ?, ?, ?, ?, ?)',
+        [id, parentId, pos, depth, title, note]);
+  }
+
   Future<List<Map<String, Object?>>> getTitles() async {
     return await _db.rawQuery(
         'SELECT id, parent_id, pos, depth, title FROM notes ORDER BY depth, pos');

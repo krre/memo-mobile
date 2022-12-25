@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
 class Network {
@@ -16,6 +18,16 @@ class Network {
       return response.body;
     } else {
       throw Exception('Failed to get database name');
+    }
+  }
+
+  Future<dynamic> fetchNotes() async {
+    final response = await http.get(_makeUri('notes'));
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to get notes');
     }
   }
 }
