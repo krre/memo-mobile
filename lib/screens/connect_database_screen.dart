@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:memo/net/network.dart';
@@ -17,13 +15,13 @@ class ConnectDatabaseScreen extends StatefulWidget {
 class _ConnectDatabaseScreenState extends State<ConnectDatabaseScreen> {
   String _ip = '';
   String _port = '';
-  String _key = '';
+  String _token = '';
   final _network = Network();
 
   Future<void> _connectToRemoteDatabase() async {
     _network.ip = _ip;
     _network.port = int.parse(_port);
-    _network.key = _key;
+    _network.token = _token;
 
     final response = await _network.fetchName();
     await Db.getInstance().create(response['name'], overwrite: true);
@@ -63,14 +61,17 @@ class _ConnectDatabaseScreenState extends State<ConnectDatabaseScreen> {
                   ),
                 ),
                 TextField(
-                  onChanged: (text) => _key = text,
+                  onChanged: (text) => _token = text,
                   decoration: InputDecoration(
-                    labelText: l10n.key,
+                    labelText: l10n.token,
                   ),
                 ),
                 ElevatedButton(
                     onPressed: () async {
-                      if (_ip.isEmpty || _port.isEmpty || _key.isEmpty) return;
+                      if (_ip.isEmpty || _port.isEmpty || _token.isEmpty) {
+                        return;
+                      }
+
                       final navigator = Navigator.of(context);
                       await _connectToRemoteDatabase();
 

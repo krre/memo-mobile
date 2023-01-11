@@ -9,7 +9,7 @@
     "name": "Name",
     "ip": "IP address",
     "port": "Port",
-    "key": "Key",
+    "token": "Token",
     "notes": "Notes",
     "ok": "OK",
     "cancel": "Cancel",
