@@ -25,16 +25,14 @@ class _ConnectDatabaseScreenState extends State<ConnectDatabaseScreen> {
     _network.port = int.parse(_port);
     _network.key = _key;
 
-    final name = await _network.fetchName();
-    await Db.getInstance().create(name, overwrite: true);
+    final response = await _network.fetchName();
+    await Db.getInstance().create(response['name'], overwrite: true);
 
     final notes = await _network.fetchNotes();
 
     for (final note in notes) {
-      final decodedTitle = utf8.decode(base64.decode(note['title'] ?? ''));
-      final decodedNote = utf8.decode(base64.decode(note['note'] ?? ''));
       await Db.getInstance().insertRemoteNote(note['id'], note['parentId'],
-          note['pos'], note['depth'], decodedTitle, decodedNote);
+          note['pos'], note['depth'], note['title'], note['note']);
     }
   }
 

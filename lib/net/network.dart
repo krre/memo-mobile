@@ -11,21 +11,21 @@ class Network {
     return Uri.parse('http://$ip:$port/$endpoint');
   }
 
-  Future<String> fetchName() async {
-    final response = await http.get(_makeUri('name'));
+  Future<dynamic> fetchName() async {
+    final response = await http.get(_makeUri('name'), headers: {"token": key});
 
     if (response.statusCode == 200) {
-      return response.body;
+      return jsonDecode(utf8.decode(response.body.runes.toList()));
     } else {
       throw Exception('Failed to get database name');
     }
   }
 
   Future<dynamic> fetchNotes() async {
-    final response = await http.get(_makeUri('notes'));
+    final response = await http.get(_makeUri('notes'), headers: {"token": key});
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.body);
+      return jsonDecode(utf8.decode(response.body.runes.toList()));
     } else {
       throw Exception('Failed to get notes');
     }
