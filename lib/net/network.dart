@@ -8,7 +8,7 @@ class Network {
   String token = '';
 
   Uri _makeUri(String endpoint) {
-    return Uri.parse('http://$ip:$port/$endpoint');
+    return Uri.parse('https://$ip:$port/$endpoint');
   }
 
   Future<dynamic> fetchName() async {
