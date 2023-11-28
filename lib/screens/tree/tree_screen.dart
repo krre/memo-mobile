@@ -70,7 +70,7 @@ class TreeScrenState extends State<TreeScreen> {
 
     final l10n = AppLocalizations.of(context);
     final RenderBox overlay =
-        Overlay.of(context)!.context.findRenderObject() as RenderBox;
+        Overlay.of(context).context.findRenderObject() as RenderBox;
 
     showMenu(
         context: context,
