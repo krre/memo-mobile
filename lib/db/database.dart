@@ -14,7 +14,7 @@ class DatabaseExistsException implements Exception {
 
   @override
   String toString() {
-    return 'Database exists witn name $name';
+    return 'Database exists with name $name';
   }
 }
 
